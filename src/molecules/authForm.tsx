@@ -10,6 +10,12 @@ import { Button } from "@/components/ui/button";
 import { LOGIN_MUTATION } from "@/utils/graphql/mutations/auth";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 
 export function UserAuthForm({
   className,
@@ -17,7 +23,7 @@ export function UserAuthForm({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [login] = useMutation(LOGIN_MUTATION);
-  const [wrongPassword, setWrongPassword] = React.useState<boolean>(false);
+  const [showPopup, setShowPopup] = React.useState<boolean>(false); // Controla el popup
   const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -28,74 +34,97 @@ export function UserAuthForm({
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const { data, errors } = await login({
-      variables: { email, password },
-    });
+    try {
+      const { data } = await login({
+        variables: { email, password },
+      });
 
-    if (data.login) {
-      localStorage.setItem("token", data.login.token);
-      await router.push("/admin");
-    }
-    if (errors) {
-      toast.error("Usuario o contraseña incorrectos");
-      setWrongPassword(true);
+      if (data && data.login) {
+        localStorage.setItem("token", data.login.token);
+        await router.push("/admin");
+      }
+    } catch (error: any) {
+      // Manejo del error
+      if (
+        error.graphQLErrors &&
+        error.graphQLErrors[0]?.message === "No such user found"
+      ) {
+        setShowPopup(true); // Mostrar popup si el usuario no está en la base de datos
+      } else {
+        toast.error("Usuario o contraseña incorrectos");
+      }
     }
 
     setIsLoading(false);
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Bienvenido</h1>
-        <p className="text-sm text-muted-foreground text-white">
-          Ingresa sus datos
-        </p>
-      </div>
-      <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Contraseña
-            </Label>
-            <Input
-              id="password"
-              name="password"
-              placeholder="contraseña"
-              type="password"
-              disabled={isLoading}
-            />
-          </div>
-          {wrongPassword && (
-            <p className={"text-red-500 text-center"}>
-              Usuario o contraseña incorrectos
-            </p>
-          )}
-          <Button
-            disabled={isLoading}
-            className="bg-blue-700 justify-center w-2/5">
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
-            )}
-            Conectar
-          </Button>
+    <>
+      <div className={cn("grid gap-6", className)} {...props}>
+        <div className="flex flex-col space-y-2 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">Bienvenido</h1>
+          <p className="text-sm text-muted-foreground text-white">
+            Ingresa sus datos
+          </p>
         </div>
-      </form>
-    </div>
+        <form onSubmit={onSubmit}>
+          <div className="grid gap-2">
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="email">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+                type="email"
+                autoCapitalize="none"
+                autoComplete="email"
+                autoCorrect="off"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="password">
+                Contraseña
+              </Label>
+              <Input
+                id="password"
+                name="password"
+                placeholder="contraseña"
+                type="password"
+                disabled={isLoading}
+              />
+            </div>
+            <Button
+              disabled={isLoading}
+              className="bg-blue-700 justify-center w-2/5">
+              {isLoading && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
+              )}
+              Conectar
+            </Button>
+          </div>
+        </form>
+      </div>
+
+      {/* Popup para usuario no encontrado */}
+      <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
+        <DialogTitle>Usuario no encontrado</DialogTitle>
+        <DialogContent>
+          <p>
+            No pudimos encontrar una cuenta asociada a este correo. Por favor,
+            verifica tus credenciales o contacta al administrador.
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setShowPopup(false)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
