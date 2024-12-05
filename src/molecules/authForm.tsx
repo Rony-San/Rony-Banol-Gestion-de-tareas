@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 import { LOGIN_MUTATION } from "@/utils/graphql/mutations/auth";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+
+import { ApolloError } from "@apollo/client";
+
 import {
   Dialog,
   DialogTitle,
@@ -43,21 +46,25 @@ export function UserAuthForm({
         localStorage.setItem("token", data.login.token);
         await router.push("/admin");
       }
-    } catch (error: any) {
-      // Manejo del error
-      if (
-        error.graphQLErrors &&
-        error.graphQLErrors[0]?.message === "No such user found"
-      ) {
-        setShowPopup(true); // Mostrar popup si el usuario no está en la base de datos
+    } catch (error) {
+      if (error instanceof ApolloError) {
+        // Verificamos si es un error de Apollo
+        if (
+          error.graphQLErrors.length > 0 &&
+          error.graphQLErrors[0].message === "No such user found"
+        ) {
+          setShowPopup(true); // Mostrar popup si el usuario no está en la base de datos
+        } else {
+          toast.error("Usuario o contraseña incorrectos");
+        }
       } else {
-        toast.error("Usuario o contraseña incorrectos");
+        console.error("Unexpected error:", error);
+        toast.error("Ocurrió un error inesperado");
       }
     }
 
     setIsLoading(false);
   }
-
   return (
     <>
       <div className={cn("grid gap-6", className)} {...props}>
