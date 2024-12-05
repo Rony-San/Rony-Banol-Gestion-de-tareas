@@ -20,11 +20,13 @@ Accede a la aplicación en el siguiente enlace:
 ## 👤 Usuarios de prueba
 
 ### **Administrador**
-- **Correo:** `admin1@admin.com`  
+
+- **Correo:** `admin1@admin.com`
 - **Contraseña:** `admin`
 
 ### **Usuario**
-- **Correo:** `user1@user.com`  
+
+- **Correo:** `user1@user.com`
 - **Contraseña:** `user`
 
 ---
@@ -32,22 +34,30 @@ Accede a la aplicación en el siguiente enlace:
 ## 🛠️ Cómo iniciar el proyecto localmente
 
 ### **1. Clonar el repositorio**
-```bash
+
+---
+
+bash
 git clone https://github.com/Rony-San/Rony-Banol-Gestion-de-tareas.git
 cd Rony-Banol-Gestion-de-tareas
-2. Instalar dependencias
-Usamos Yarn como gestor de paquetes. Asegúrate de tenerlo instalado previamente:
 
+### 2. Instalar dependencias
+
+Usamos Yarn como gestor de paquetes. Asegúrate de tenerlo instalado previamente:
 bash
 Copy code
 yarn install
-3. Configurar variables de entorno
+
+### 3. Configurar variables de entorno
+
 Crea un archivo .env.local en el directorio raíz y añade las siguientes variables necesarias para conectarte al backend GraphQL:
 
 env
 Copy code
 NEXT_PUBLIC_GRAPHQL_ENDPOINT=https://tu-servidor-graphql.com/graphql
-4. Iniciar el servidor de desarrollo
+
+### 4. Iniciar el servidor de desarrollo
+
 Ejecuta el siguiente comando para iniciar el servidor localmente:
 
 bash
@@ -55,7 +65,10 @@ Copy code
 yarn dev
 La aplicación estará disponible en: http://localhost:3000
 
-🧰 Herramientas utilizadas
+---
+
+## 🧰 Herramientas utilizadas
+
 Frontend: React + Next.js
 GraphQL: Apollo Client
 Estilos: Tailwind CSS
@@ -63,34 +76,28 @@ UI: Material-UI (MUI)
 Notificaciones: react-toastify
 Backend: GraphQL (configurado externamente)
 Despliegue: Vercel
-💻 Funcionalidades principales
+
+---
+
+## 💻 Funcionalidades principales
+
 Inicio de sesión: Diferenciado entre Administradores y Usuarios.
 Gestión de proyectos: Crear, editar y listar proyectos.
 Gestión de tareas: Asignar tareas, cambiar estado y ver detalles.
 Responsividad: Optimizado para dispositivos móviles y de escritorio.
 Manejo de errores: Notificaciones claras mediante Toastify.
 Actualización en tiempo real: Integración con Apollo Cache.
-📂 Estructura del proyecto
+
+---
+
+## 📂 Estructura del proyecto
+
 plaintext
 Copy code
 src/
-├── components/     # Componentes reutilizables
-├── molecules/      # Componentes más complejos (formularios, modales)
-├── pages/          # Páginas de Next.js
-├── types/          # Definición de tipos TypeScript
-├── utils/          # Funciones auxiliares y configuración de GraphQL
-├── styles/         # Configuración de estilos
-✨ Contribuciones
-Si deseas contribuir a este proyecto, ¡eres bienvenido! Puedes abrir un Issue o un Pull Request en el repositorio:
-🔗 Rony-Banol-Gestion-de-tareas
-
-🛡️ Licencia
-Este proyecto está bajo la licencia MIT. ¡Siéntete libre de usarlo y modificarlo como desees! 😊
-
-¡Gracias por usar Gestión de Tareas! 💪 Si tienes algún problema o sugerencia, no dudes en contactar. 📨
-
-perl
-Copy code
-
-### Resultado
-Este archivo README es completamente copiable y pegable, manteniendo el formato correcto y sin nec
+├── components/ # Componentes reutilizables
+├── molecules/ # Componentes más complejos (formularios, modales)
+├── pages/ # Páginas de Next.js
+├── types/ # Definición de tipos TypeScript
+├── utils/ # Funciones auxiliares y configuración de GraphQL
+├── styles/ # Configuración de estilos
