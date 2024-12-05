@@ -2,8 +2,7 @@
 
 import AdminLayout from "@/layouts/_layout";
 import { UserEditForm } from "@/molecules/userEditForm";
-import { Button } from "@/components/ui/button";
-import { Undo2 } from "lucide-react";
+
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_USER_QUERY } from "@/utils/graphql/queries/users";
@@ -21,11 +20,6 @@ const EditUserPage: React.FC = () => {
     variables: { id },
     skip: !id,
   });
-
-  const handleBack = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    router.back();
-  };
 
   if (loading) return <IsLoading />;
   if (error) return <p>Error: {error.message}</p>;

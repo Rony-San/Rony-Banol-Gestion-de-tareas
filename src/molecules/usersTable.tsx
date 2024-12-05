@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { FaPenSquare, FaTrashAlt } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
 import { DELETE_USER_MUTATION } from "@/utils/graphql/mutations/users";
 import { useRouter } from "next/router";

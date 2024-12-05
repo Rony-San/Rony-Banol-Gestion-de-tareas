@@ -3,13 +3,7 @@ import { GET_PROJECTS } from "@/utils/graphql/queries/projects";
 import { useMemo, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Pie, PieChart, Cell, Tooltip } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -57,8 +51,8 @@ export const DonutData = () => {
 
   const generateRandomColor = () => {
     const hue = Math.floor(Math.random() * 360);
-    const saturation = Math.floor(Math.random() * 40) + 60; 
-    const lightness = Math.floor(Math.random() * 30) + 50; 
+    const saturation = Math.floor(Math.random() * 40) + 60;
+    const lightness = Math.floor(Math.random() * 30) + 50;
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   };
 

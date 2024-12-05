@@ -1,7 +1,6 @@
 import AdminLayout from "@/layouts/_layout";
 import useMiddleware from "@/hooks/useMiddleware";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import Link from "next/link";
 import { IsLoading } from "@/molecules/isLoading";
 import { Role } from "@/utils/enums";

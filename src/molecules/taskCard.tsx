@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Task } from "@/types/tasks";
 import { useEffect, useState } from "react";
-import { FaPenSquare, FaTrashAlt } from "react-icons/fa";
 import DeleteTaskPopup from "@/molecules/deleteTaskPopup";
 import EditTaskPopup from "@/molecules/editTaskPopup";
 import { handleShowStatus } from "@/utils/helpers";

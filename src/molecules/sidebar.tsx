@@ -1,7 +1,6 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -10,13 +9,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
 import { Role, UserProps } from "@/utils/enums";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useMutation } from "@apollo/client";
-import { LOGOUT_MUTATION } from "@/utils/graphql/mutations/auth";
-import { Icons } from "@/components/ui/icons";
 
 interface SidebarItemProps {
   title: string;

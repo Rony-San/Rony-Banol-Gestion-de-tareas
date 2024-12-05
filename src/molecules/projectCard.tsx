@@ -1,8 +1,7 @@
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Project } from "@/types/projects";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { FaPenSquare, FaTrashAlt } from "react-icons/fa";
 import useMiddleware from "@/hooks/useMiddleware";
 import { Role } from "@/types/users";
 import { useEffect, useState } from "react";

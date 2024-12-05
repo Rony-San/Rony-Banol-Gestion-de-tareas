@@ -18,7 +18,6 @@ import { Alert, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { GET_ALL_USERS_QUERY } from "@/utils/graphql/queries/users";
 import { useRouter } from "next/router";
-import { IsLoading } from "./isLoading";
 
 interface UserEditFormProps {
   user: UserProps;

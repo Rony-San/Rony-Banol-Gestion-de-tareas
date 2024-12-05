@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import TaskCard from "@/molecules/taskData";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import Link from "next/link";
 import AdminLayout from "@/layouts/_layout";
 import useMiddleware from "@/hooks/useMiddleware";

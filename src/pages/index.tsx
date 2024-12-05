@@ -1,4 +1,3 @@
-import { UserAuthForm } from "@/molecules/authForm";
 import LandingPage from "./landing";
 
 export default function Home() {
