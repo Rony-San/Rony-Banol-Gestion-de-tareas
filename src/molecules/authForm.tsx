@@ -57,6 +57,7 @@ export function UserAuthForm({
         } else {
           toast.error("Usuario o contraseña incorrectos");
         }
+        
       } else {
         console.error("Unexpected error:", error);
         toast.error("Ocurrió un error inesperado");
